@@ -7,3 +7,7 @@
 | ng version                                          | verificar versión de Angular       |
 | git init                                            | iniciar repositorio                |
 | git status                                          | verificar estado de mis archivos   |
+| git add .                                           | agregamos archivos al git          |
+| git commit -m "V1_Angular"                          | sellamos los archivos para enviar  |
+
+
