@@ -1,0 +1,83 @@
+<!-- <p>user.component works!</p>
+
+<button type="button" class="btn btn-info">Info</button> -->
+
+<div class="container my-5">
+
+    @for (u of user; track u.id){
+        <li> 
+            {{ u.name }} - {{ u.email }} - {{ u.phone }}
+        </li>
+    }
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of user; track u.id){
+            <tr>
+
+                <th scope="row">{{ u.id }}</th>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.phone }}</td>
+            </tr>
+        }
+      </tbody>
+    </table>
+
+
+     <h2 class="text-center mb-4">
+    Lista de Usuarios
+  </h2>
+
+  <div class="row g-4">
+
+    @for(user of exampleApi; track user.email){
+
+      <div class="col-md-4">
+
+        <div class="card shadow-sm h-100">
+
+          <div class="text-center mt-3">
+
+            <img 
+              [src]="user.picture.large"
+              class="rounded-circle"
+              width="120"
+              height="120"
+            >
+
+          </div>
+
+          <div class="card-body text-center">
+
+            <h5 class="card-title">
+              {{user.name.first}} {{user.name.last}}
+            </h5>
+
+            <p class="text-muted">
+              {{user.email}}
+            </p>
+
+            <p>
+              {{user.location.city}}, {{user.location.country}}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+</div>
+
+
