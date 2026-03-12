@@ -1,0 +1,35 @@
+
+
+
+<h2 class="text-center mb-4">
+    Lista de Usuarios
+</h2>
+<div class="row">
+    @for(user of exampleApi; track user.id){
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-3">
+                <div class="text-center my-3">
+                    <img [src]="user.picture.medium" class="rounded-circle" alt="Imagen perfil">
+                </div>
+                <div class="card-body text-center">
+                    <h6 class="card-title">
+                        {{ user.name.first }} - {{ user.name.last}}
+                    </h6>
+                    <p class="text-muted">
+                        {{ user.email}}
+                    </p>
+                    <p>
+                       Pais: {{ user.location.country }} Ciudad: {{ user.location.city }}
+                    </p>
+
+                    <button class="btn btn-outline-danger btn-sm me-2">
+                        Eliminar
+                    </button>
+                    <button class="btn btn-outline-success btn-sm ">
+                        Visualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
