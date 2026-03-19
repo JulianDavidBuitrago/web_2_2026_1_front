@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { PracticaService } from '../../../services/practica.service/practica.service';
+import { UserService } from '../../../services/user.service/user.service';
 
 @Component({
   selector: 'app-practica.component',
@@ -9,20 +10,29 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 })
 export class PracticaComponent {
   exampleApi: any = [];
+  user: any[] = [];
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef){
-    
-    this.getExampleApi();
+  constructor(private usrPractica: PracticaService,/* private usr: UserService, */ private cdr: ChangeDetectorRef){
+    this.usrPractica.getPractica().subscribe(data =>{
+      this.exampleApi = data.results;
+      console.log(this.exampleApi);
+      this.cdr.detectChanges();
+    });
+    /* this.usr.getUsers().subscribe(data =>{
+      this.user = data;
+      console.log(this.user);
+      this.cdr.detectChanges();
+    }); */
   }
 
-  getExampleApi(){
-    /* this.http.get<any>('https://randomuser.me/api/?results=5').subscribe(data => { */
+  /* getExampleApi(){
+    /* this.http.get<any>('https://randomuser.me/api/?results=5').subscribe(data => { 
     this.http.get<any>('https://randomuser.me/api/?results=10').subscribe(data => {
      this.exampleApi = data.results;
      console.log(this.exampleApi);    
      this.cdr.detectChanges();  
    }); 
 
-  }
+  } */
 
 }
