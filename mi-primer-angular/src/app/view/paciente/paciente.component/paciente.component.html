@@ -1,0 +1,84 @@
+<div class="container mt-5 mb-5">
+    
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 mt-1">Gestión de Pacientes</h4>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="guardarPaciente()" #pacienteForm="ngForm">
+                
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-bold">Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="pacienteActual.nombre" required placeholder="Ej. Julian Buitrago">
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-bold">Celular:</label>
+                        <input type="text" class="form-control" name="celular" [(ngModel)]="pacienteActual.celular" required placeholder="Ej. 3001234567">
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-bold">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-control" name="fecha_nacimiento" [(ngModel)]="pacienteActual.fecha_nacimiento" required>
+                    </div>
+                </div>
+        
+                <div class="d-flex justify-content-end mt-2">
+                    <button type="button" class="btn btn-secondary me-2" (click)="resetearFormulario()" *ngIf="editando">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn" [ngClass]="editando ? 'btn-success' : 'btn-primary'" [disabled]="!pacienteForm.form.valid">
+                        {{ editando ? 'Actualizar Paciente' : 'Crear Paciente' }}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+        
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0 mt-1">Lista de Pacientes</h4>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Nombre</th>
+                            <th>Celular</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (paciente of pacientes; track paciente.id) {
+                        <tr>
+                            <td class="ps-4 fw-bold">{{ paciente.id }}</td>
+                            <td>{{ paciente.nombre }}</td>
+                            <td>{{ paciente.celular }}</td>
+                            <td>{{ paciente.fecha_nacimiento | date:'shortDate' }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm me-2" (click)="editarPaciente(paciente)">
+                                    Editar
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="eliminarPaciente(paciente.id)">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">
+                                <em>No hay pacientes registrados aún.</em>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
